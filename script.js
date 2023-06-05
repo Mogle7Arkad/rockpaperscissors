@@ -1,18 +1,12 @@
+const selectionButtons  = document.querySelectorAll('[data-selection]');
 
-function getComputerChoice(){
-    let option = ["Rock", "Paper", "Scissors"];
-    let random = Math.floor(Math.random() * option.length);
-    console.log(random, option[random]);
-};
-getComputerChoice();
+selectionButtons.forEach(selectionButton => {
+    selectionButton.addEventListener('click', e => {
+        const selectionName = selectionButton.dataset.selectionButton
+        makeSelection(selectionName)
+    })
+})
 
-//k
-//let option = ["Rock", "Paper", "Scissors"];
-//let randomm = Math.floor(Math.random() * option.length);
-//console.log(randomm, option[randomm]);
-
-//kl
-//const months = ["January", "February", "March"];
-
-//const random = Math.floor(Math.random() * months.length);
-//console.log(random, months[random]);
+function makeSelection(selection){
+    console.log(selection)
+}
