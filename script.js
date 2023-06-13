@@ -1,116 +1,75 @@
+let computerScore = 0;
+let playerScore = 0;
+const playScore_span = document.querySelector('#playScore');
+const compScore_span = document.querySelector('#compScore');
+
+const scoreBoard = document.querySelector('.score_board');
+const resultDom = document.querySelector('p');
+
+
+const selection = document.getElementById('r')
+const rockDom = document.querySelector('.rockbtn');
+const paperDom = document.querySelector('.paperbtn');
+const scissorsDom = document.querySelector('.scissorsbtn');
 
 function getComputerChoice(){
-  const computerChoices = ["paper", "rock", "scissors"];
-  const choice = Math.floor(Math.random() * 3);
-  console.log("computer picks : " + computerChoices[choice]);
-  return computerChoices[choice];
+  const choices = ['rock', 'paper', 'scissors'];
+  const randomNumber = Math.floor(Math.random() * 3);
+  return choices[randomNumber];
+}
+getComputerChoice();
+
+function wins(playerChoice, computerChoice){
+  playerScore++;
+  playScore_span.innerHTML = playerScore;
+  compScore_span.innerHTML = computerScore;
+  resultDom.innerHTML = (playerChoice) +' beats '+ (computerChoice) + '. You win!';
+  
 }
 
-//function getPlayerChoice(){
-//  const playerChoice = (prompt('Make your selection!')).toLowerCase();
-//  if (playerChoice === 'paper') {
-//    console.log('You chose Paper');
-//    return 'paper';
-//  }else if (playerChoice === 'rock') {
-//    console.log('You chose Rock');
-//    return 'rock';
-//  }else if (playerChoice === 'scissors') {
-//    console.log('You chose Scissors');
-//    return 'scissors';
-//  }else {
-//    console.log('Wrong input! Enter a valid choice');
-//  }
-//}
+function lose(playerChoice, computerChoice){
+  computerScore++;
+  playScore_span.innerHTML = playerScore;
+  compScore_span.innerHTML = computerScore;  
+  resultDom.innerHTML = (computerChoice) +' beats '+ (playerChoice) + '. You lose!';
+}
 
-function playRound() {
-  let playerSelection = prompt("make your choice").toLowerCase();
-  let computerSelection = getComputerChoice();
-  let playerScore = 0;
-  let computerScore = 0;
-  let round = 0;
-  console.log("player picks: " + playerSelection);
-
-  for(i = 0; i < 5; i++){
-
-  if (playerSelection === computerSelection){
-   
-    console.log('Its a tie!')
-    round++;
-    console.log(round);
-    console.log(playerScore);
-    console.log(computerScore)
-
-  }
-
-    else if (playerSelection ==='paper') {
-      if (computerSelection === 'rock')  {
-        
-        console.log('Paper Covers Rock');
-        playerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);
-        console.log(computerScore)
-
-      } else {
-       
-        console.log('Scissors Cuts paper');
-        computerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);//capture a dom element// 
-        console.log(computerScore)
-
-      }
-    }else if (playerSelection === 'rock') {
-      if (computerSelection === 'scissors') {
-        
-        console.log('Rock Breaks Scissors');
-        playerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);
-        console.log(computerScore);
-
-      }else {
-        
-        console.log('Paper Covers Rock');
-        computerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);
-        console.log(computerScore);
-      }
-    }else if (playerSelection === 'scissors') {
-      if (computerSelection === 'paper') {
-        
-        console.log('Scissors Cuts paper');
-        playerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);
-        console.log(computerScore);
-
-      }else {
-
-        console.log('Rock breaks Scissors');
-        computerScore++;
-        round++;
-        console.log(round);
-        console.log(playerScore);
-        console.log(computerScore);
-
-      }
-    }else {
-      console.log('Try Again');
-    }
-  }
+function draw(playerChoice, computerChoice){
+  resultDom.innerHTML = playerChoice +' equals '+ computerChoice + '. A draw!';
+  
 }
 
 
+function game(playerChoice){
+  const computerChoice = getComputerChoice();
+  switch(playerChoice + computerChoice){
+    case 'paperrock':
+    case 'rockscissors':
+    case 'scissorspaper':
+      wins(playerChoice, computerChoice);
+      break;
+    case 'rockpaper':
+    case 'scissorsrock':
+    case 'paperscissors':
+      lose(playerChoice, computerChoice);
+      break;
+    case 'rockrock':
+    case 'paperpaper':
+    case 'scissorsscissors':
+      draw(playerChoice, computerChoice);
+      break;
+  }
+}
 
-
-playRound();
-
-
-//game();
+function main(){
+  rockDom.addEventListener('click', function() {
+    game('rock');
+  })
+  paperDom.addEventListener('click', function() {
+    game('paper');
+  })
+  scissorsDom.addEventListener('click', function() {
+    game('scissors');
+  })
+}
+main();
