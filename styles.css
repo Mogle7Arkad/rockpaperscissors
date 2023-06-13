@@ -1,27 +1,45 @@
-body{
-    background-color: beige;
-}
-.selections{
-    display: flex;
-    justify-content: center;
+*{
+    margin: 0%;
+    box-sizing: border-box;
+    padding: 0%;
 }
 
-.selection{
-    background: none;
-    border: none;
-    outline: none;
-    border-radius: 4em;
+body{
+    background-color: beige;
+    width: 100%;
+    height: 100vh;
+}
+.choices{
+    display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 100ms;
-    font-weight: bold;
 }
-.selection:hover{
+.choice{
+    display: flex;
+    gap: 5em;
+}
+
+button{
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+button:hover{
     transform: scale(1.2);
 }
-.results{
+
+.score_board{
+    margin: 20px auto;
+    border: 2px solid rgb(141, 130, 130);
+    border-radius: 4px;    
+    width: 150px;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.result{
     margin-top: 1rem;
     display: grid;
     justify-content: center;
@@ -32,7 +50,34 @@ body{
     font-size: 1rem;
 }
 
-.result-score{
-    margin-left: .1rem;
-    color: #333;
+.score_board>div{
+    border: 2px solid gray;
+    padding: 2px 18px;
+}
+.score_board>div.player{
+    position: absolute;
+    top: 30%;
+    left: -30%;
+}
+
+.score_board>div.computer{
+    position: absolute;
+    top: 30%;
+    left: 70%;
+}
+.score_board>span{
+    margin-left: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.result{
+    font-size: 40px;
+    text-align: center;
+    justify-content: center;
+    margin-left: 29%
+}
+.result>p{
+    padding-left: 20%;
+    
 }
